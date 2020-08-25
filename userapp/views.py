@@ -3,11 +3,12 @@ from userapp import forms
 from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 # Create your views here.
 @login_required
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'result': settings.AUTH_USER_MODEL})
 
 
 def login_view(request):
@@ -36,7 +37,7 @@ def signup_view(request):
                 displayname=data.get('displayname')
             )
             if signup_user:
-                return HttpResponseRedirect(reverse("homepage"))
+                return HttpResponseRedirect(reverse("login_page"))
     form = forms.SignupForm()
     return render(request, 'signup.html', {'form': form})
 

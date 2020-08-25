@@ -6,6 +6,8 @@ class CustomUser(AbstractUser):
     displayname = models.CharField(max_length=30)
     age = models.IntegerField(null=True)
     url = models.URLField(null=True)
+    REQUIRED_FIELDS = ['age']
+
 
 
 
